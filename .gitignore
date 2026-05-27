@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+data/raw/
+outputs/*.html
+
+.streamlit/venv/
+.venv/
+.DS_Store
