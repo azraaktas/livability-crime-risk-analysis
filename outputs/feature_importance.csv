@@ -1,0 +1,13 @@
+﻿Model,Feature,Importance
+Decision Tree,total_crime_count,0.7554
+Decision Tree,total_crime_weight,0.2332
+Decision Tree,avg_longitude,0.0112
+Decision Tree,avg_latitude,0.0001
+Random Forest,total_crime_weight,0.59
+Random Forest,total_crime_count,0.3998
+Random Forest,avg_longitude,0.0063
+Random Forest,avg_latitude,0.0039
+XGBoost,total_crime_weight,0.6626
+XGBoost,total_crime_count,0.3374
+XGBoost,avg_latitude,0.0
+XGBoost,avg_longitude,0.0

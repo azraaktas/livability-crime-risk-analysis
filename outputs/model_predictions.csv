@@ -1,0 +1,113 @@
+﻿Model,Actual Safety Score,Predicted Safety Score
+Linear Regression,92.12,92.1144
+Linear Regression,95.55,95.5498
+Linear Regression,92.97,92.9738
+Linear Regression,75.96,75.9547
+Linear Regression,71.9,71.8965
+Linear Regression,87.28,87.2758
+Linear Regression,54.8,54.8018
+Linear Regression,89.07,89.0721
+Linear Regression,80.64,80.6403
+Linear Regression,51.91,51.9133
+Linear Regression,50.74,50.7422
+Linear Regression,84.62,84.6226
+Linear Regression,69.32,69.3207
+Linear Regression,96.49,96.4862
+Linear Regression,95.55,95.5504
+Linear Regression,94.77,94.7693
+Decision Tree,92.12,91.96
+Decision Tree,95.55,95.24
+Decision Tree,92.97,91.96
+Decision Tree,75.96,74.79
+Decision Tree,71.9,72.05
+Decision Tree,87.28,88.68
+Decision Tree,54.8,59.41
+Decision Tree,89.07,89.46
+Decision Tree,80.64,80.64
+Decision Tree,51.91,59.41
+Decision Tree,50.74,46.45
+Decision Tree,84.62,85.01
+Decision Tree,69.32,69.24
+Decision Tree,96.49,96.57
+Decision Tree,95.55,96.1
+Decision Tree,94.77,95.16
+Random Forest,92.12,91.6761
+Random Forest,95.55,95.2732
+Random Forest,92.97,92.478
+Random Forest,75.96,75.6095
+Random Forest,71.9,72.2333
+Random Forest,87.28,89.1838
+Random Forest,54.8,57.383
+Random Forest,89.07,89.7551
+Random Forest,80.64,80.6204
+Random Forest,51.91,51.4479
+Random Forest,50.74,46.4032
+Random Forest,84.62,84.933
+Random Forest,69.32,69.045
+Random Forest,96.49,96.8194
+Random Forest,95.55,95.7156
+Random Forest,94.77,95.045
+Gradient Boosting,92.12,91.6823
+Gradient Boosting,95.55,95.2434
+Gradient Boosting,92.97,92.2227
+Gradient Boosting,75.96,75.8777
+Gradient Boosting,71.9,72.0793
+Gradient Boosting,87.28,88.1193
+Gradient Boosting,54.8,59.4114
+Gradient Boosting,89.07,89.4155
+Gradient Boosting,80.64,80.5766
+Gradient Boosting,51.91,52.7533
+Gradient Boosting,50.74,47.8485
+Gradient Boosting,84.62,84.9955
+Gradient Boosting,69.32,69.2342
+Gradient Boosting,96.49,96.6788
+Gradient Boosting,95.55,95.6127
+Gradient Boosting,94.77,94.9323
+XGBoost,92.12,92.12750244140625
+XGBoost,95.55,95.2479019165039
+XGBoost,92.97,92.84510040283203
+XGBoost,75.96,78.91899871826172
+XGBoost,71.9,72.04039764404297
+XGBoost,87.28,89.68229675292969
+XGBoost,54.8,59.414398193359375
+XGBoost,89.07,90.18830108642578
+XGBoost,80.64,80.73860168457031
+XGBoost,51.91,56.28689956665039
+XGBoost,50.74,56.27909851074219
+XGBoost,84.62,85.01399993896484
+XGBoost,69.32,69.87429809570312
+XGBoost,96.49,96.5479965209961
+XGBoost,95.55,96.08100128173828
+XGBoost,94.77,94.92620086669922
+SVR,92.12,83.7954
+SVR,95.55,85.4779
+SVR,92.97,85.8544
+SVR,75.96,77.8
+SVR,71.9,78.1222
+SVR,87.28,83.9684
+SVR,54.8,70.7631
+SVR,89.07,84.033
+SVR,80.64,81.7203
+SVR,51.91,71.1189
+SVR,50.74,70.9246
+SVR,84.62,83.3633
+SVR,69.32,77.7557
+SVR,96.49,85.0036
+SVR,95.55,87.0564
+SVR,94.77,85.6912
+ANN / MLP,92.12,92.519
+ANN / MLP,95.55,96.3927
+ANN / MLP,92.97,92.7419
+ANN / MLP,75.96,79.5607
+ANN / MLP,71.9,72.7816
+ANN / MLP,87.28,87.2364
+ANN / MLP,54.8,54.7921
+ANN / MLP,89.07,89.8178
+ANN / MLP,80.64,80.3086
+ANN / MLP,51.91,51.2981
+ANN / MLP,50.74,51.8319
+ANN / MLP,84.62,84.9687
+ANN / MLP,69.32,69.8179
+ANN / MLP,96.49,97.6488
+ANN / MLP,95.55,96.2804
+ANN / MLP,94.77,95.846
