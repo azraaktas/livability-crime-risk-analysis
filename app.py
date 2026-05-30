@@ -36,13 +36,103 @@ st.set_page_config(
 st.title("Yaşanabilirlik Odaklı Güvenlik Skoru ve Suç Analiz Sistemi")
 
 df = pd.read_csv(DATA_PATH)
+community_names = {
+    1: "Rogers Park",
+    2: "West Ridge",
+    3: "Uptown",
+    4: "Lincoln Square",
+    5: "North Center",
+    6: "Lake View",
+    7: "Lincoln Park",
+    8: "Near North Side",
+    9: "Edison Park",
+    10: "Norwood Park",
+    11: "Jefferson Park",
+    12: "Forest Glen",
+    13: "North Park",
+    14: "Albany Park",
+    15: "Portage Park",
+    16: "Irving Park",
+    17: "Dunning",
+    18: "Montclare",
+    19: "Belmont Cragin",
+    20: "Hermosa",
+    21: "Avondale",
+    22: "Logan Square",
+    23: "Humboldt Park",
+    24: "West Town",
+    25: "Austin",
+    26: "West Garfield Park",
+    27: "East Garfield Park",
+    28: "Near West Side",
+    29: "North Lawndale",
+    30: "South Lawndale",
+    31: "Lower West Side",
+    32: "Loop",
+    33: "Near South Side",
+    34: "Armour Square",
+    35: "Douglas",
+    36: "Oakland",
+    37: "Fuller Park",
+    38: "Grand Boulevard",
+    39: "Kenwood",
+    40: "Washington Park",
+    41: "Hyde Park",
+    42: "Woodlawn",
+    43: "South Shore",
+    44: "Chatham",
+    45: "Avalon Park",
+    46: "South Chicago",
+    47: "Burnside",
+    48: "Calumet Heights",
+    49: "Roseland",
+    50: "Pullman",
+    51: "South Deering",
+    52: "East Side",
+    53: "West Pullman",
+    54: "Riverdale",
+    55: "Hegewisch",
+    56: "Garfield Ridge",
+    57: "Archer Heights",
+    58: "Brighton Park",
+    59: "McKinley Park",
+    60: "Bridgeport",
+    61: "New City",
+    62: "West Elsdon",
+    63: "Gage Park",
+    64: "Clearing",
+    65: "West Lawn",
+    66: "Chicago Lawn",
+    67: "West Englewood",
+    68: "Englewood",
+    69: "Greater Grand Crossing",
+    70: "Ashburn",
+    71: "Auburn Gresham",
+    72: "Beverly",
+    73: "Washington Heights",
+    74: "Mount Greenwood",
+    75: "Morgan Park",
+    76: "O'Hare",
+    77: "Edgewater"
+}
+df["community_name"] = (
+    df["community_area"]
+    .astype(int)
+    .map(community_names)
+)
+df["community_area"] = df["community_area"].astype(int)
+df["community_name"] = df["community_area"].map(community_names)
+
 anomaly_df = pd.read_csv(ANOMALY_PATH)
+anomaly_df["community_area"] = anomaly_df["community_area"].astype(int)
+anomaly_df["community_name"] = anomaly_df["community_area"].map(community_names)
+
 feature_importance_df = pd.read_csv(FEATURE_IMPORTANCE_PATH)
 
 # SIDEBAR
 st.sidebar.header("Filtreleme")
 
-community_list = sorted(df["community_area"].unique())
+community_list = sorted(df["community_name"].unique())
 
 selected_area = st.sidebar.selectbox(
     "Community Area Seçiniz",
@@ -68,11 +158,11 @@ filtered_df = df[
 ]
 
 selected_data = df[
-    df["community_area"] == selected_area
+    df["community_name"] == selected_area
 ].iloc[0]
 
 selected_anomaly = anomaly_df[
-    anomaly_df["community_area"] == selected_area
+    anomaly_df["community_name"] == selected_area
 ].iloc[0]
 
 anomaly_status = selected_anomaly["anomaly_status"]
@@ -182,10 +272,10 @@ top_risky = df.sort_values(
 safe_col, risky_col = st.columns(2)
 
 with safe_col:
-    st.markdown("### En Güvenli 10 Bölge")
+    st.markdown("### En Güvenli 10 Bölge" )
     st.dataframe(
         top_safe[[
-            "community_area",
+            "community_name",
             "safety_score",
             "risk_level",
             "total_crime_count",
@@ -195,10 +285,10 @@ with safe_col:
     )
 
 with risky_col:
-    st.markdown("### En Riskli 10 Bölge")
+    st.markdown("### En Riskli 10 Bölge" )
     st.dataframe(
         top_risky[[
-            "community_area",
+            "community_name",
             "safety_score",
             "risk_level",
             "total_crime_count",
@@ -213,21 +303,22 @@ st.subheader("Bölge Karşılaştırma")
 area_col1, area_col2 = st.columns(2)
 
 with area_col1:
+    compare_list = sorted(df["community_name"].unique())
     compare_area_1 = st.selectbox(
         "1. Bölgeyi Seçiniz",
-        community_list,
+        compare_list,
         key="compare_area_1"
     )
 
 with area_col2:
     compare_area_2 = st.selectbox(
         "2. Bölgeyi Seçiniz",
-        community_list,
+        compare_list,
         key="compare_area_2"
     )
 
-area_1_data = df[df["community_area"] == compare_area_1].iloc[0]
-area_2_data = df[df["community_area"] == compare_area_2].iloc[0]
+area_1_data = df[df["community_name"] == compare_area_1].iloc[0]
+area_2_data = df[df["community_name"] == compare_area_2].iloc[0]
 
 comparison_df = pd.DataFrame({
     "Metric": [
@@ -236,13 +327,13 @@ comparison_df = pd.DataFrame({
         "Total Crime Count",
         "Total Crime Weight"
     ],
-    f"Community Area {compare_area_1}": [
+    compare_area_1: [
         area_1_data["safety_score"],
         area_1_data["risk_level"],
         area_1_data["total_crime_count"],
         area_1_data["total_crime_weight"]
     ],
-    f"Community Area {compare_area_2}": [
+    compare_area_2: [
         area_2_data["safety_score"],
         area_2_data["risk_level"],
         area_2_data["total_crime_count"],
@@ -294,7 +385,7 @@ anomaly_chart = px.scatter(
     y="safety_score",
     color="anomaly_status",
     hover_data=[
-        "community_area",
+        "community_name",
         "risk_level",
         "total_crime_count"
     ],
@@ -314,7 +405,7 @@ st.markdown("### Tespit Edilen Anormal Bölgeler")
 
 st.dataframe(
     anomalies_only[[
-        "community_area",
+        "community_name",
         "safety_score",
         "risk_level",
         "total_crime_count",
@@ -341,7 +432,7 @@ cluster_chart = px.scatter(
     y="safety_score",
     color="risk_level",
     hover_data=[
-        "community_area",
+        "community_name",
         "cluster",
         "total_crime_count"
     ],
@@ -355,6 +446,13 @@ st.subheader("Hierarchical Clustering Sonuçları")
 
 hierarchical_df = pd.read_csv(HIERARCHICAL_DATA_PATH)
 hierarchical_metrics_df = pd.read_csv(HIERARCHICAL_METRICS_PATH)
+
+hierarchical_df["community_area"] = hierarchical_df["community_area"].astype(int)
+
+hierarchical_df["community_name"] = (
+    hierarchical_df["community_area"]
+    .map(community_names)
+)
 
 hierarchical_silhouette = hierarchical_metrics_df.loc[
     hierarchical_metrics_df["Metric"] == "Silhouette Score",
@@ -374,7 +472,7 @@ hierarchical_chart = px.scatter(
     y="safety_score",
     color="hierarchical_risk_level",
     hover_data=[
-        "community_area",
+        "community_name",
         "hierarchical_cluster",
         "total_crime_count"
     ],
@@ -410,7 +508,7 @@ for _, row in filtered_df.iterrows():
         fill_color=get_color(row["risk_level"]),
         fill_opacity=0.7,
         popup=(
-            f"Community Area: {row['community_area']}<br>"
+            f"Community Area: {row['community_name']}<br>"
             f"Safety Score: {row['safety_score']}<br>"
             f"Risk Level: {row['risk_level']}<br>"
             f"Crime Count: {row['total_crime_count']}"
