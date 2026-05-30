@@ -30,7 +30,7 @@ df = pd.read_csv(DATA_PATH)
 # SIDEBAR
 st.sidebar.header("Filtreleme")
 
-community_list = sorted(df["community_area"].unique())
+community_list = sorted(df["community_name"].unique())
 
 selected_area = st.sidebar.selectbox(
     "Community Area Seçiniz",
@@ -56,7 +56,7 @@ filtered_df = df[
 ]
 
 selected_data = df[
-    df["community_area"] == selected_area
+    df["community_name"] == selected_area
 ].iloc[0]
 
 # KPI CARDS
@@ -120,7 +120,7 @@ for _, row in filtered_df.iterrows():
         fill_color=get_color(row["risk_level"]),
         fill_opacity=0.7,
         popup=(
-            f"Community Area: {row['community_area']}<br>"
+            f"Community Area: {row['community_name']}<br>"
             f"Safety Score: {row['safety_score']}<br>"
             f"Risk Level: {row['risk_level']}"
         )

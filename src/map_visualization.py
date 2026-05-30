@@ -32,7 +32,7 @@ for _, row in df.iterrows():
         fill_color=get_color(row["risk_level"]),
         fill_opacity=0.7,
         popup=(
-            f"Community Area: {row['community_area']}<br>"
+            f"Community Area: {row['community_name']}<br>"
             f"Safety Score: {row['safety_score']}<br>"
             f"Risk Level: {row['risk_level']}<br>"
             f"Crime Count: {row['total_crime_count']}"
