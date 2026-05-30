@@ -2,6 +2,7 @@ import pandas as pd
 from pathlib import Path
 
 
+
 INPUT_PATH = "data/processed/chicago_crimes_cleaned.csv"
 OUTPUT_PATH = "data/processed/community_safety_scores.csv"
 
@@ -45,31 +46,41 @@ def calculate_safety_score(df):
         total_crime_count=("id", "count"),
         total_crime_weight=("crime_weight", "sum"),
         avg_latitude=("latitude", "mean"),
-        avg_longitude=("longitude", "mean")
+        avg_longitude=("longitude", "mean"),
+        arrest_rate=("arrest", "mean")
     ).reset_index()
 
-    min_weight = grouped_df["total_crime_weight"].min()
-    max_weight = grouped_df["total_crime_weight"].max()
+    def normalize(column):
+        min_value = grouped_df[column].min()
+        max_value = grouped_df[column].max()
+
+        if max_value == min_value:
+            return 0
+
+        return (grouped_df[column] - min_value) / (max_value - min_value)
+
+    normalized_weight = normalize("total_crime_weight")
+    normalized_count = normalize("total_crime_count")
 
     grouped_df["risk_score"] = (
-        (grouped_df["total_crime_weight"] - min_weight)
-        / (max_weight - min_weight)
+        0.6 * normalized_weight +
+        0.3 * normalized_count +
+        0.1 * (1 - grouped_df["arrest_rate"])
     ) * 100
 
     grouped_df["safety_score"] = 100 - grouped_df["risk_score"]
 
     grouped_df["safety_score"] = grouped_df["safety_score"].round(2)
     grouped_df["risk_score"] = grouped_df["risk_score"].round(2)
+    grouped_df["arrest_rate"] = grouped_df["arrest_rate"].round(3)
 
     return grouped_df
-
 
 def save_data(df, file_path):
     Path(file_path).parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(file_path, index=False, encoding="utf-8-sig")
     print(f"Güvenlik skoru verisi kaydedildi: {file_path}")
-
-
+    
 if __name__ == "__main__":
     df = load_data(INPUT_PATH)
 

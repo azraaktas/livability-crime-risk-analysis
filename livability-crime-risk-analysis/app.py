@@ -150,15 +150,18 @@ st.subheader("Model Performans Karşılaştırması")
 model_df = pd.DataFrame({
     "Model": [
         "Random Forest",
-        "ANN / MLP"
+        "ANN / MLP",
+        "LSTM"
     ],
     "MAE": [
-        0.81,
+        0.45,
+        0.47,
         0.80
     ],
     "R2 Score": [
-        0.99,
-        0.99
+        1.00,
+        1.00,
+        0.60
     ]
 })
 

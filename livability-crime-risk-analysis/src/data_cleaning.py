@@ -1,14 +1,14 @@
 import pandas as pd
 from pathlib import Path
 
-
-INPUT_PATH = "data/raw/chicago_crimes_2023.csv"
+INPUT_PATH = "data/raw/chicago_crimes_2015_2025_monthly.csv"
 OUTPUT_PATH = "data/processed/chicago_crimes_cleaned.csv"
 
 
 def load_data(file_path):
     df = pd.read_csv(file_path)
     return df
+
 
 
 def clean_data(df):

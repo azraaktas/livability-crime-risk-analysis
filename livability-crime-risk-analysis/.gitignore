@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+data/raw/
+outputs/*.html
+
+.streamlit/venv/
+.venv/
+.DS_Store
+data/processed/chicago_crimes_cleaned.csv
